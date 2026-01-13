@@ -103,7 +103,6 @@
             height: 300px;
             margin-bottom: 1rem;
             overflow: hidden;
-            border-radius: 0.5rem;
         }
 
         .cover img {
@@ -362,8 +361,8 @@
 
         @media (max-width: 768px) {
             .container {
-                max-width: 97vw;
-                width: 97vw;
+                max-width: 99vw;
+                width: 99vw;
                 margin: 0.5rem auto;
                 padding: 1rem;
             }
@@ -377,7 +376,13 @@
             }
 
             .cover {
-                border-radius: 0.5rem;
+                width: calc(100% + 2rem);
+                margin: -1rem -1rem 1rem;
+            }
+
+            .cover img {
+                width: 100vw;
+                height: 105vw;
             }
 
             .link-card {
