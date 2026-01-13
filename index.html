@@ -103,6 +103,7 @@
             height: 300px;
             margin-bottom: 1rem;
             overflow: hidden;
+            border-radius: 0.5rem;
         }
 
         .cover img {
@@ -170,6 +171,35 @@
             color: rgb(31, 41, 55);
             font-size: 0.875rem;
             font-weight: 600;
+        }
+
+        /* Instagram Icon in Cover */
+        .instagram-link {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 35;
+            width: 38px;
+            height: 38px;
+            background: white;
+            border-radius: 50%;
+            padding: 0.15rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .instagram-link:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .instagram-link img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
         }
 
         /* Countdown */
@@ -332,8 +362,8 @@
 
         @media (max-width: 768px) {
             .container {
-                max-width: 99vw;
-                width: 99vw;
+                max-width: 97vw;
+                width: 97vw;
                 margin: 0.5rem auto;
                 padding: 1rem;
             }
@@ -347,17 +377,19 @@
             }
 
             .cover {
-                width: calc(100% + 2rem);
-                margin: -1rem -1rem 1rem;
+                border-radius: 0.5rem;
             }
 
-            .cover img {
-                width: 100vw;
-                height: 105vw;
-            }
-            
             .link-card {
                 border-radius: 0.5rem;
+            }
+
+            .instagram-link {
+                width: 42px;
+                height: 42px;
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.15rem;
             }
         }
     </style>
@@ -383,6 +415,11 @@
                     <span class="status-text">En ligne</span>
                 </div>
             </div>
+            
+            <!-- Instagram Icon -->
+            <a href="https://www.instagram.com/cindy" target="_blank" class="instagram-link">
+                <img src="https://freelogopng.com/images/all_img/1658588965instagram-logo-png-transparent-background.png" alt="Instagram">
+            </a>
         </div>
 
         <!-- Countdown Section -->
@@ -410,7 +447,7 @@
         <div class="links-grid">
             <!-- OnlyFans Card -->
             <a href="https://onlyfans.com/cindylps" target="_blank" class="link-card">
-                <img src="assert\CindyOf.jpeg" alt="Mon OnlyFans">
+                <img src="assert\CindyOf2.jpeg" alt="Mon OnlyFans">
                 <div class="link-overlay"></div>
                 <div class="link-content">
                     <h3 class="link-title">Mon OnlyFans - GRATUIT 💙</h3>
@@ -421,9 +458,9 @@
                 </div>
             </a>
 
-             <!-- OnlyFans Card -->
+            <!-- OnlyFans Card -->
             <a href="https://onlyfans.com/alicia.gfd/c2" target="_blank" class="link-card">
-                <img src="assert\CindyOf2.jpeg" alt="Mon OnlyFans">
+                <img src="assert\CindyOf.jpeg" alt="Mon OnlyFans">
                 <div class="link-overlay"></div>
                 <div class="link-content">
                     <h3 class="link-title">Contenus exclusifs ❤️</h3>
@@ -433,9 +470,6 @@
                     <img src="https://ucarecdn.com/6b0bc347-a082-451a-9c45-9a6adab8d8d2/onlyfans-1.webp" alt="OnlyFans Icon">
                 </div>
             </a>
-
-
-
         </div>
     </div>
 
@@ -468,9 +502,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
