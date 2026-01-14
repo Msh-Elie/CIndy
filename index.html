@@ -655,7 +655,7 @@
             const scrolledAmount = Math.max(0, scrollY - imageTop);
             
             // Pourcentage du noircissement (diviser par imageHeight * 0.35 pour atteindre 100% à 35%)
-            let scrollPercent = scrolledAmount / (imageHeight * 0.35);
+            let scrollPercent = scrolledAmount / (imageHeight * 0.30);
             scrollPercent = Math.min(1, scrollPercent);
             
             // Appliquer l'opacité à l'overlay
@@ -719,4 +719,5 @@
         });
     });
 </script>
+
 
