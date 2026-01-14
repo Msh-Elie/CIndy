@@ -159,7 +159,7 @@
         .profile-picture {
             width: 100%;
             height: auto;
-            max-height: 50vh;
+            max-height: 60vh;
             object-fit: cover;
             object-position: center;
             mask-image: linear-gradient(rgb(0, 0, 0) 0%, rgb(0, 0, 0) 80%, rgba(0, 0, 0, 0) 100%);
@@ -633,8 +633,8 @@
             // Calculer combien on a scrollé par rapport à l'image
             const scrolledAmount = Math.max(0, scrollY - imageTop);
             
-            // Pourcentage du noircissement (diviser par imageHeight * 0.7 pour atteindre 100% plus tôt)
-            let scrollPercent = scrolledAmount / (imageHeight * 0.7);
+            // Pourcentage du noircissement (diviser par imageHeight * 0.5 pour atteindre 100% à 50%)
+            let scrollPercent = scrolledAmount / (imageHeight * 0.5);
             scrollPercent = Math.min(1, scrollPercent);
             
             // Appliquer l'opacité à l'overlay
@@ -698,4 +698,3 @@
         });
     });
 </script>
-
