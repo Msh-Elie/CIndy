@@ -252,6 +252,12 @@
             transform: scale(1.02);
         }
 
+        /* Bouton MYM — style distinct */
+        .link-button-mym {
+            background-color: #ff3e6c;
+            color: #fff;
+        }
+
         /* Animation bounce */
         .bounce-animation {
             animation: bounce 2s infinite;
@@ -389,7 +395,7 @@
             font-weight: 500;
         }
 
-        .link-item:first-of-type .link-text {
+        .link-item .link-text {
             margin: 8px;
             font-size: 16px;
         }
@@ -603,7 +609,7 @@
 
                 <!-- Liens -->
                 <div class="links-section">
-                    <!-- Lien 2 -->
+                    <!-- Lien 1 : OnlyFans -->
                     <div class="link-item">
                         <a href="https://onlyfans.com/cindylps" target="_blank" rel="nofollow noopener noreferrer" class="link-button animated-border bounce-animation">
                             <div class="link-text">
@@ -612,7 +618,14 @@
                         </a>
                     </div>
 
-                
+                    <!-- Lien 2 : MYM -->
+                    <div class="link-item">
+                        <a href="https://mym.fans/Cindylopes" target="_blank" rel="nofollow noopener noreferrer" class="link-button link-button-mym animated-border bounce-animation">
+                            <div class="link-text">
+                                <span>Mon MYM 🌶️</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Footer -->
@@ -633,7 +646,7 @@
     const profilePicture = document.querySelector('.profile-picture');
 
     // Décompte de 20 minutes
-    let countdownSeconds = 20 * 60; // 20 minutes en secondes
+    let countdownSeconds = 20 * 60;
     const countdownElement = document.getElementById('countdown');
 
     function updateCountdown() {
@@ -646,34 +659,26 @@
         if (countdownSeconds > 0) {
             countdownSeconds--;
         } else {
-            // Recommencer à 20:00 quand il arrive à 0
             countdownSeconds = 20 * 60;
         }
     }
 
-    // Mettre à jour chaque seconde
     setInterval(updateCountdown, 1000);
-    updateCountdown(); // Initialiser immédiatement
+    updateCountdown();
 
     // Gestion du noircissement et du header au scroll
     window.addEventListener('scroll', () => {
         if (profilePictureContainer && overlayDarkening && stickyHeader) {
-            // Récupérer la position de l'image par rapport au document
             const imageTop = profilePictureContainer.offsetTop;
             const imageHeight = profilePictureContainer.offsetHeight;
             const scrollY = window.scrollY;
             
-            // Calculer combien on a scrollé par rapport à l'image
             const scrolledAmount = Math.max(0, scrollY - imageTop);
-            
-            // Pourcentage du noircissement (diviser par imageHeight * 0.35 pour atteindre 100% à 35%)
             let scrollPercent = scrolledAmount / (imageHeight * 0.37);
             scrollPercent = Math.min(1, scrollPercent);
             
-            // Appliquer l'opacité à l'overlay
             overlayDarkening.style.opacity = scrollPercent;
             
-            // Afficher le header quand la photo est au moins 20% scrollée
             if (scrollPercent > 0.2) {
                 stickyHeader.classList.add('visible');
             } else {
@@ -682,7 +687,6 @@
         }
     });
 
-    // Observer pour le fallback
     if (profilePicture) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -704,23 +708,18 @@
         button.addEventListener('click', (e) => {
             e.preventDefault();
             
-            // Vérifier si le bouton est déjà en mode modal
             if (button.classList.contains('modal-state')) {
-                // C'est un clic sur "Continue"
                 const href = button.getAttribute('data-href');
                 window.open(href, '_blank');
                 return;
             }
 
-            // Stocker l'URL et transformer le bouton
             const href = button.getAttribute('href');
             button.setAttribute('data-href', href);
             
-            // Sauvegarder le texte original
             const originalHTML = button.innerHTML;
             button.setAttribute('data-original', originalHTML);
             
-            // Transformer le bouton en modal
             button.classList.add('modal-state');
             button.innerHTML = `
                 <div class="modal-icon">🔞</div>
@@ -731,10 +730,3 @@
         });
     });
 </script>
-
-
-
-
-
-
-
