@@ -438,7 +438,7 @@
     <!-- LINK CARDS -->
     <div class="links-grid">
 
-      <!-- Card 1 : OnlyFans 
+      <!-- Card 1 : OnlyFans
       <a class="link-card sensitive-card" href="https://onlyfans.com/cindylps" target="_blank" rel="nofollow noopener noreferrer" data-label="OnlyFans">
         <img class="card-bg" src="assert/Cindy.jpeg" alt="OnlyFans" style="object-position: 50% 39%;">
         <div class="card-gradient"></div>
@@ -511,21 +511,36 @@
 </div>
 
 <script>
-  // ── Cartes sensibles : 1er clic = flou + badge, 2e clic = ouverture ──
-  document.querySelectorAll('.sensitive-card').forEach(function(card) {
-    let revealed = false;
-    card.addEventListener('click', function(e) {
-      if (!revealed) {
+  // ── Cartes sensibles : contenu visible par défaut ──
+  // 1er clic  : la carte se floute + badge "Contenu sensible" apparaît
+  // 2e clic   : le lien s'ouvre dans un nouvel onglet
+  // Si on clique sur une autre carte pendant qu'une est floutée,
+  // la précédente redevient visible et la nouvelle se floute.
+  (function() {
+    const cards = document.querySelectorAll('.sensitive-card');
+    let currentlyRevealed = null;
+
+    cards.forEach(function(card) {
+      card.addEventListener('click', function(e) {
+        // Cas 1 : cette carte est déjà floutée → on laisse le lien s'ouvrir
+        if (card.classList.contains('revealed')) {
+          card.classList.remove('revealed');
+          currentlyRevealed = null;
+          return; // navigation normale (target="_blank")
+        }
+
+        // Cas 2 : une autre carte est floutée → on la défloute
+        if (currentlyRevealed && currentlyRevealed !== card) {
+          currentlyRevealed.classList.remove('revealed');
+        }
+
+        // Cas 3 : on floute la carte cliquée et on bloque la navigation
         e.preventDefault();
         card.classList.add('revealed');
-        revealed = true;
-      } else {
-        // laisse le lien s'ouvrir (target _blank)
-        card.classList.remove('revealed');
-        revealed = false;
-      }
+        currentlyRevealed = card;
+      });
     });
-  });
+  })();
 
   // ── Panneau de cadrage (mode édition via ?edit) ──
   (function() {
