@@ -189,6 +189,11 @@
       transition: transform 0.2s, box-shadow 0.2s;
       display: block;
       text-decoration: none;
+      /* ─── FIX MOBILE : force un vrai clipping du flou ─── */
+      isolation: isolate;
+      -webkit-mask-image: -webkit-radial-gradient(white, black);
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
     }
 
     .link-card:hover {
@@ -202,7 +207,11 @@
       width: 100%; height: 100%;
       object-fit: cover;
       object-position: center 40%;
-      transition: filter 0.3s;
+      transform: scale(1);
+      transition: filter 0.3s, transform 0.3s;
+      /* ─── FIX MOBILE : force l'image dans sa propre couche ─── */
+      transform-origin: center center;
+      will-change: filter, transform;
     }
 
     .link-card .card-gradient {
@@ -263,7 +272,12 @@
 
     .sensitive-badge svg { width: 16px; height: 16px; flex-shrink: 0; }
 
-    .link-card.revealed .card-bg,
+    /* ─── ÉTAT FLOUTÉ ─── */
+    .link-card.revealed .card-bg {
+      filter: blur(12px);
+      transform: scale(1.15); /* pousse les bords flous hors du cadre */
+    }
+
     .link-card.revealed .card-gradient,
     .link-card.revealed .card-text {
       filter: blur(12px);
