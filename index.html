@@ -189,6 +189,10 @@
       transition: transform 0.2s, box-shadow 0.2s;
       display: block;
       text-decoration: none;
+      isolation: isolate;
+      -webkit-mask-image: -webkit-radial-gradient(white, black);
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
     }
 
     .link-card:hover {
@@ -202,7 +206,10 @@
       width: 100%; height: 100%;
       object-fit: cover;
       object-position: center 40%;
-      transition: filter 0.3s;
+      transform: scale(1);
+      transition: filter 0.3s, transform 0.3s;
+      transform-origin: center center;
+      will-change: filter, transform;
     }
 
     .link-card .card-gradient {
@@ -263,7 +270,11 @@
 
     .sensitive-badge svg { width: 16px; height: 16px; flex-shrink: 0; }
 
-    .link-card.revealed .card-bg,
+    .link-card.revealed .card-bg {
+      filter: blur(12px);
+      transform: scale(1.15);
+    }
+
     .link-card.revealed .card-gradient,
     .link-card.revealed .card-text {
       filter: blur(12px);
@@ -497,20 +508,28 @@
 
 <script>
   // ── Cartes sensibles : 1er clic = flou + badge, 2e clic = ouverture ──
-  document.querySelectorAll('.sensitive-card').forEach(function(card) {
-    let revealed = false;
-    card.addEventListener('click', function(e) {
-      if (!revealed) {
-        e.preventDefault();
+  (function() {
+    const cards = document.querySelectorAll('.sensitive-card');
+    let currentlyRevealed = null;
+
+    cards.forEach(function(card) {
+      card.addEventListener('click', function(event) {
+        if (card.classList.contains('revealed')) {
+          card.classList.remove('revealed');
+          currentlyRevealed = null;
+          return;
+        }
+
+        if (currentlyRevealed && currentlyRevealed !== card) {
+          currentlyRevealed.classList.remove('revealed');
+        }
+
+        event.preventDefault();
         card.classList.add('revealed');
-        revealed = true;
-      } else {
-        // laisse le lien s'ouvrir (target _blank)
-        card.classList.remove('revealed');
-        revealed = false;
-      }
+        currentlyRevealed = card;
+      });
     });
-  });
+  })();
 
   // ── Panneau de cadrage (mode édition via ?edit) ──
   (function() {
